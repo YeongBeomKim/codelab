@@ -1,12 +1,18 @@
 import React from 'react';
 
 class App extends React.Component {
-    render(){
+  render() {
+      /* Check whether current route is login or register using regex */
+      let re = /(login|register)/;
+      let isAuth = re.test(this.props.location.pathname);
 
-        return (
-                <h1>Hello React Skeleton</h1>
-        );
-    }
+      return (
+          <div>
+              {isAuth ? undefined : <Header/>}
+              { this.props.children }
+          </div>
+      );
+  }
 }
 
 export default App;

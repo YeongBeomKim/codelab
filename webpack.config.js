@@ -1,35 +1,29 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: [
+      './src/index.js',
+      './src/style.css'
+    ]
 
     output: {
         path: __dirname + '/public/',
         filename: 'bundle.js'
     },
-
-    devServer: {
-        hot: true,
-        inline: true,
-        host: '0.0.0.0',
-        port: 4000,
-        contentBase: __dirname + '/public/',
+    resolve: {
+            root: path.resolve('./src')
     },
-
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel?' + JSON.stringify({
+                loaders: ['babel?' + JSON.stringify({
                     cacheDirectory: true,
                     presets: ['es2015', 'react']
                 })],
                 exclude: /node_modules/,
             }
         ]
-    },
-
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+    }
 };
